@@ -18,7 +18,7 @@ Paperless-ngx is a document management system that transforms your physical docu
 Paperless-ngx forked from [paperless-ng](https://github.com/jonaswinkler/paperless-ng) to continue the great work and distribute responsibility of supporting and advancing the project among a team of people. [Consider joining us!](#community-support) Discussion of this transition can be found in issues
 [#1599](https://github.com/jonaswinkler/paperless-ng/issues/1599) and [#1632](https://github.com/jonaswinkler/paperless-ng/issues/1632).
 
-#Paperless-ngx on Kubernetes
+# Paperless-ngx on Kubernetes
 I ran paperless-ngx on Docker for a while and moved to istalltion to Kubernetes.  I did this for a couple of reasons
 - Learn Kubernetes Better
 - Help out people who wnated to learn Kubernetes better
