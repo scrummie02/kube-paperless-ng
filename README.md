@@ -19,13 +19,15 @@ Paperless-ngx forked from [paperless-ng](https://github.com/jonaswinkler/paperle
 [#1599](https://github.com/jonaswinkler/paperless-ng/issues/1599) and [#1632](https://github.com/jonaswinkler/paperless-ng/issues/1632).
 
 # Paperless-ngx on Kubernetes
+I don't care...take me to [TLDR](#TLDR)
+
 I ran paperless-ngx on Docker for a while and moved to istalltion to Kubernetes.  I did this for a couple of reasons
 - Learn Kubernetes Better
 - Help out people who wnated to learn Kubernetes better
 - See how a document management sytem would scale and work for me
 
 This is my manifiests that I used to put paperless into my microk8s cluster.  There are a few caveats here:
-- if you run multiple nodes in your cluster your PVC configs will beed to refelct that, OpenEBS is a good option
+- If you run multiple nodes in your cluster your PVC configs will beed to refelct that, OpenEBS is a good option
 - I put the consumption directory on and NFS share - why you ask?  Simple
     - If you have a scanner you can scan directly to a share on a NAS, File server or whatever you want
     - Usually this is a share folder somewhere, created a PVC for this seemed like a bad idea a share was best
@@ -53,7 +55,7 @@ Or whatever you want to call your secret.
 
 That's it.  
 
-TLDR:
+# TLDR
 1. Go to cli
     kubectl create namespace paperless
 2. Edit paperless-config.yaml to your liking 
