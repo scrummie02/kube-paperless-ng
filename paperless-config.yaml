@@ -4,7 +4,7 @@ metadata:
   name: paperless-config
   namespace: paperless
 data:
-  PAPERLESS_SECRET_KEY: "8x/A?D(G-KaPdSgVkYp3s6v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQfTjWnZq4t7w!z%C*F-JaNdRgUkXp2s5u8x/A?D(G+KbPeShVmYq3t6w9y$B&E)H@McQfTjWnZr4u7x!A%C*F-JaNdRgUkXp2s5v8y/B?E(G+KbPeShVmYq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-Ka"
+  PAPERLESS_SECRET_KEY: "generate a long secret or make one up"
   PAPERLESS_DBHOST: paperless-db
   PAPERLESS_REDIS: "redis://paperless-broker:6379"
   PAPERLESS_TIKA_ENABLED: "1"
