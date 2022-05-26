@@ -56,9 +56,9 @@ Or whatever you want to call your secret.
 That's it.  
 
 # TLDR
-1. Go to cli
-    kubectl create namespace paperless
+1. Go to CLI
+    ```kubectl create namespace paperless```
 2. Edit paperless-config.yaml to your liking 
 3. Back to CLI
-    kubectl -n paperless apply -f .
+    ```kubectl -n paperless apply -f .```
 4. Profit
