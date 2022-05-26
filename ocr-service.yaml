@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: paperless-ocr
+  name: paperless-ocr
+spec:
+  ports:
+    - name: gotenberg
+      port: 3000
+      targetPort: 3000
+    - name: tika
+      port: 9998
+      targetPort: 9998
+  selector:
+    io.kompose.service: paperless-ocr

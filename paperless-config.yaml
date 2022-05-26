@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: paperless-config
+  namespace: paperless
+data:
+  PAPERLESS_SECRET_KEY: "8x/A?D(G-KaPdSgVkYp3s6v9y$B&E)H@MbQeThWmZq4t7w!z%C*F-JaNdRfUjXn2r5u8x/A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQfTjWnZq4t7w!z%C*F-JaNdRgUkXp2s5u8x/A?D(G+KbPeShVmYq3t6w9y$B&E)H@McQfTjWnZr4u7x!A%C*F-JaNdRgUkXp2s5v8y/B?E(G+KbPeShVmYq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-Ka"
+  PAPERLESS_DBHOST: paperless-db
+  PAPERLESS_REDIS: "redis://paperless-broker:6379"
+  PAPERLESS_TIKA_ENABLED: "1"
+  PAPERLESS_TIKA_ENDPOINT: http://paperless-ocr:9998
+  PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-ocr:3000
+  PAPERLESS_TIME_ZONE: America/New_York
+  PAPERLESS_OCR_LANGUAGE: "eng"
+  PAPERLESS_CONSUMER_RECURSIVE: "true"
+  PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
+  USERMAP_UID: "1000"
+  USERMAP_GID: "100"
