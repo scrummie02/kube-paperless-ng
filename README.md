@@ -26,7 +26,7 @@ I ran paperless-ngx on Docker for a while and moved to installation to Kubernete
 - Help out people who wanted to learn Kubernetes better
 - See how a document management sytem would scale and work for me
 
-This is my manifiests that I used to put paperless into my microk8s cluster.  There are a few caveats here:
+This is repo of the manifiests that I used to put paperless into my microk8s cluster.  There are a few caveats here:
 - If you run multiple nodes in your cluster your PVC configs will beed to refelct that, OpenEBS is a good option
 - I put the consumption directory on and NFS share - why you ask?  Simple
     - If you have a scanner you can scan directly to a share on a NAS, File server or whatever you want
