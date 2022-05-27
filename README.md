@@ -21,9 +21,9 @@ Paperless-ngx forked from [paperless-ng](https://github.com/jonaswinkler/paperle
 # Paperless-ngx on Kubernetes
 I don't care...take me to [TLDR](#TLDR)
 
-I ran paperless-ngx on Docker for a while and moved to istalltion to Kubernetes.  I did this for a couple of reasons
-- Learn Kubernetes Better
-- Help out people who wnated to learn Kubernetes better
+I ran paperless-ngx on Docker for a while and moved to installation to Kubernetes.  I did this for a couple of reasons
+- Learn Kubernetes better
+- Help out people who wanted to learn Kubernetes better
 - See how a document management sytem would scale and work for me
 
 This is my manifiests that I used to put paperless into my microk8s cluster.  There are a few caveats here:
