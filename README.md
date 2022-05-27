@@ -62,3 +62,6 @@ That's it.
 3. Back to CLI
     ```kubectl -n paperless apply -f .```
 4. Profit
+
+# TO DO LIST
+Add autoscaling in with horizontal autoscale 
