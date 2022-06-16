@@ -61,6 +61,8 @@ That's it.
 2. Edit paperless-config.yaml to your liking 
 3. Back to CLI
     ```kubectl -n paperless apply -f .```
+4. Create a Super User 
+   ```kubectl -n paperless exec --stdin --tty pod/paperless-app-xxxxxxx -- python3 ./manage.py createsuperuser ```
 4. Profit
 
 # TO DO LIST

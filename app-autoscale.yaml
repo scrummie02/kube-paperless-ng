@@ -1,0 +1,15 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: paperless-app-autoscale
+  labels:
+    io.kompose.service: paperless-app
+  namespace: paperless
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: paperless-app
+  targetCPUUtilizationPercentage: 40

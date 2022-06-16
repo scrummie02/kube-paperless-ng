@@ -27,11 +27,21 @@ spec:
             - name: DISABLE_GOOGLE_CHROME
               value: "1"
           image: thecodingmachine/gotenberg
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
           ports:
             - containerPort: 3000
           resources: {}
         - name: tika
           image: apache/tika:1.28.1-full
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
           ports:
             - containerPort: 9998
           resources: {}

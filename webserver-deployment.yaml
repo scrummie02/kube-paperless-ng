@@ -51,18 +51,6 @@ spec:
               name: paperless-consume
       restartPolicy: Always
       volumes:
-        - name: webserver-claim0
-          persistentVolumeClaim:
-            claimName: webserver-claim0
-        - name: webserver-claim1
-          persistentVolumeClaim:
-            claimName: webserver-claim1
-        - name: webserver-claim2
-          persistentVolumeClaim:
-            claimName: webserver-claim2
-        - name: webserver-claim3
-          persistentVolumeClaim:
-            claimName: webserver-claim3
         - name: paperless-consume
           nfs:
             server: Your-NFS-HOSTNAME-OR-IP
