@@ -4,15 +4,26 @@ metadata:
   name: paperless-config
   namespace: paperless
 data:
-  PAPERLESS_SECRET_KEY: "generate a long secret or make one up"
+  PAPERLESS_URL: "https://xxxxxxxxxxxxxxxxxxxx"
+  PAPERLESS_TASK_WORKERS: "2"
+  PAPERLESS_THREADS_PER_WORKER: "1"
+  PAPERLESS_SECRET_KEY: "xxxxxxxxxxxxxxxxxxxx"
   PAPERLESS_DBHOST: paperless-db
+  PAPERLESS_DBPORT: "3306"
+  PAPERLESS_DBENGINE: "mariadb"
   PAPERLESS_REDIS: "redis://paperless-broker:6379"
   PAPERLESS_TIKA_ENABLED: "1"
   PAPERLESS_TIKA_ENDPOINT: http://paperless-ocr:9998
   PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://paperless-ocr:3000
-  PAPERLESS_TIME_ZONE: America/New_York
-  PAPERLESS_OCR_LANGUAGE: "eng"
-  PAPERLESS_CONSUMER_RECURSIVE: "true"
+  PAPERLESS_TIME_ZONE: Europe/Berlin
+  PAPERLESS_OCR_LANGUAGE: "deu+eng"
+  PAPERLESS_CONSUMER_IGNORE_PATTERNS: "[\".DS_Store\", \".DS_STORE/*\", \"._*\", \".stfolder/*\", \".stversions/*\", \".localized/*\", \"desktop.ini\"]"
+  PAPERLESS_CONSUMER_POLLING_FIRST: "15"
+  PAPERLESS_CONSUMER_POLLING_OTHER: "99999999"
+  PAPERLESS_CONSUMER_POLLING_DELAY: "4"
+  PAPERLESS_CONSUMER_POLLING_RETRY_COUNT: "2"
+  PAPERLESS_CONSUMER_RECURSIVE: "false"
   PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
+  PAPERLESS_CONSUMER_ENABLE_BARCODES: "true"
   USERMAP_UID: "1000"
   USERMAP_GID: "100"

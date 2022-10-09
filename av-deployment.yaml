@@ -30,7 +30,13 @@ spec:
           name: paperless-av
           ports:
             - containerPort: 3310
-          resources: {}
+          resources: 
+            limits:
+              cpu:      "500m"
+              memory: "1500Mi"
+            requests:
+              cpu:      "200m"
+              memory:    "1Gi"
           volumeMounts:
             - mountPath: /var/lib/clamav
               name: paperless-av

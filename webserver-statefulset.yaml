@@ -1,0 +1,140 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: paperless-app
+  name: paperless-app
+
+spec:
+  serviceName: "paperless-service"
+  replicas: 2
+  selector:
+    matchLabels:
+      io.kompose.service: paperless-app
+  template:
+    metadata:
+      labels:
+        io.kompose.service: paperless-app
+    spec:
+      #initContainers:
+      #  - name: init-paperless-app
+      #    envFrom:
+      #    - configMapRef:
+      #        name: paperless-config   
+      #    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+      #    command:
+      #      - bash
+      #      - "-c"
+      #      - |
+      #        set -ex
+      #        echo 'Starting init-paperless-app';
+      #        #
+      #        # Statefulset has sticky identity, number should be last
+      #        #
+      #        [[ `hostname` =~ -([0-9]+)$ ]] || echo "Strange Hostname: $(hostname)"; exit 1
+      #        ordinal=${BASH_REMATCH[1]}
+      #        #
+      #        if [[ $ordinal -eq 0 ]]; then
+      #          printf 'First Instance .. '
+      #          PAPERLESS_CONSUMER_POLLING=${PAPERLESS_CONSUMER_POLLING_FIRST}
+      #        else
+      #          printf 'Supporting Instance .. '
+      #          PAPERLESS_CONSUMER_POLLING=${PAPERLESS_CONSUMER_POLLING_OTHER}
+      #        fi
+      #        printf 'PAPERLESS_CONSUMER_POLLING=%s\n\n' ${PAPERLESS_CONSUMER_POLLING}
+      #        #
+      #        printf '#!/usr/bin/env bash\n\nset -e\n\n'                                       >/sbin/docker-init.sh
+      #        printf 'export PAPERLESS_CONSUMER_POLLING=%s\n\n' ${PAPERLESS_CONSUMER_POLLING} >>/sbin/docker-init.sh
+      #        #
+      #        if [ -f /sbin/docker-entrypoint-orig.sh ]; then
+      #          echo "orig script exists?"
+      #        else
+      #          mv /sbin/docker-entrypoint.sh /sbin/docker-entrypoint-orig.sh
+      #        fi
+      #        cp /sbin/docker-init.sh /sbin/docker-entrypoint.sh
+      #        sed '1,3d' </sbin/docker-entrypoint-orig.sh >>/sbin/docker-entrypoint.sh
+      #        #
+      #        printf '\nNew Script: \n--\n'
+      #        cat /sbin/docker-entrypoint.sh
+      #        printf '--\n'
+      #        #
+      #        echo 'Done with init-paperless-app';
+
+      restartPolicy: Always
+      containers:
+        - name: paperless-app
+          envFrom:
+          - configMapRef:
+              name: paperless-config   
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          command:
+            - bash
+            - "-c"
+            - |
+              set -ex
+              printf 'Preparing paperless-app ... ';
+              #
+              # Statefulset has sticky identity, number should be last
+              #
+              [[ `hostname` =~ -([0-9]+)$ ]] || ( echo "Strange Hostname: $(hostname)"; exit 1 )
+              ordinal=${BASH_REMATCH[1]}
+              #
+              if [[ $ordinal -eq 0 ]]; then
+                printf 'First Instance .. '
+                export PAPERLESS_CONSUMER_POLLING=${PAPERLESS_CONSUMER_POLLING_FIRST}
+              else
+                printf 'Supporting Instance .. '
+                export PAPERLESS_CONSUMER_POLLING=${PAPERLESS_CONSUMER_POLLING_OTHER}
+                export PAPERLESS_CONSUMPTION_DIR=/tmp/nothing-here
+                mkdir      /tmp/nothing-here
+                chmod 777  /tmp/nothing-here
+              fi
+              printf 'PAPERLESS_CONSUMER_POLLING=%s\n\n' ${PAPERLESS_CONSUMER_POLLING}
+              #
+              env
+              printf '\nNow handing over to normal entrypoint ... ';
+              /sbin/docker-entrypoint.sh /usr/local/bin/paperless_cmd.sh
+
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:8000
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          ports:
+            - containerPort: 8000
+          resources: 
+            limits:
+              cpu: "2"
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /usr/src/paperless/data
+              name: webserver-claim0
+            - mountPath: /usr/src/paperless/media
+              name: webserver-claim1
+            - mountPath: /usr/src/paperless/export
+              name: webserver-claim2
+            - mountPath: /usr/src/paperless/consume
+              name: paperless-consume
+      restartPolicy: Always
+      volumes:
+        - name: paperless-consume
+          nfs:
+            server: 172.20.30.235
+            path: /volume3/Scanner-Thomas
+        - name: webserver-claim0
+          persistentVolumeClaim:
+            claimName: webserver-claim0
+        - name: webserver-claim1
+          persistentVolumeClaim:
+            claimName: webserver-claim1
+        - name: webserver-claim2
+          persistentVolumeClaim:
+            claimName: webserver-claim2

@@ -10,6 +10,6 @@ spec:
   minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
-    kind: Deployment
+    kind: StatefulSet
     name: paperless-app
-  targetCPUUtilizationPercentage: 40
+  targetCPUUtilizationPercentage: 75

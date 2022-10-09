@@ -1,0 +1,17 @@
+kind: IngressRoute
+apiVersion: traefik.containo.us/v1alpha1
+metadata:
+  name:      paperless-ingress
+  namespace: paperless
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`xxxxxxxxxxxxxxxxxxxx`)
+    kind: Rule
+    services:
+    - name: paperless-app
+      port: 8000
+  tls:
+    certResolver: myresolver
+
