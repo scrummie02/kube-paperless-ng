@@ -23,27 +23,33 @@ spec:
     spec:
       containers:
         - name: gotenberg
-          env:
-            - name: DISABLE_GOOGLE_CHROME
-              value: "1"
-          image: thecodingmachine/gotenberg
+          image: gotenberg/gotenberg:7
+          args:
+            - "gotenberg"
+            - "--uno-listener-start-timeout=30s"
+            - "--chromium-disable-routes=true"
+          securityContext:
+            privileged: false
+            runAsUser: 1001
           resources:
             limits:
-              cpu: 500m
+              cpu:    "400m"
+              memory: "750Mi"
             requests:
-              cpu: 200m
+              cpu:    "200m"
+              memory: "400Mi"
           ports:
             - containerPort: 3000
-          resources: {}
         - name: tika
-          image: apache/tika:1.28.1-full
+          image: logicalspark/docker-tikaserver:1.28.4
           resources:
             limits:
-              cpu: 500m
+              cpu:     "500m"
+              memory: "750Mi"
             requests:
-              cpu: 200m
+              cpu:     "200m"
+              memory: "350Mi"
           ports:
             - containerPort: 9998
-          resources: {}
       restartPolicy: Always
 status: {}

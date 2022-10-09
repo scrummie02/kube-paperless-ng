@@ -1,5 +1,5 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   annotations:
     kompose.version: 1.26.1 (a9d05d509)
@@ -22,25 +22,37 @@ spec:
       labels:
         io.kompose.service: paperless-db
     spec:
+
       containers:
         - env:
-            - name: POSTGRES_DB
+            - name:  MARIADB_USER
               value: paperless
-            - name: POSTGRES_PASSWORD
+            - name:  MARIADB_PASSWORD
               value: paperless
-            - name: POSTGRES_USER
+            - name:  MARIADB_DATABASE
               value: paperless
-          image: postgres:13
+            - name:  MARIADB_ROOT_PASSWORD
+              value: xxxxxxxxxxxxxxxxxxxx
+          image: mariadb
           name: paperless-db
-          resources: {}
+          resources:
+            requests: 
+              cpu:    "500m"
+              memory: "500Mi"
+            limits: 
+              cpu:    "1"
+              memory: "1Gi"
           ports:
-            - containerPort: 5432
+            - containerPort: 3306
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /var/lib/mysql/
               name: db-claim0
+
       restartPolicy: Always
+
       volumes:
         - name: db-claim0
           persistentVolumeClaim:
             claimName: db-claim0
+
 status: {}

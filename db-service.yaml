@@ -10,7 +10,7 @@ metadata:
 spec:
   ports:
     - name: paperless-db
-      port: 5432
-      targetPort: 5432
+      port: 3306
+      targetPort: 3306
   selector:
     io.kompose.service: paperless-db
